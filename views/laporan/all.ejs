@@ -1,0 +1,81 @@
+<%- include ../layouts/header.ejs %>
+ 
+<% if (messages.error) { %>
+    <p style="color:red"><%- messages.error %></p>
+<% } %>
+ 
+<% if (messages.success) { %>
+    <p style="color:green"><%- messages.success %></p>
+<% } %>    
+ 
+    <section class="content container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><div class="box-title">All</div></h3>
+            </div>
+            <div class="box-body data-table">
+            <table class="table table-bordered">
+                  <tr>
+                  <th>
+                    <p>judul</p>
+                  </th>                        
+                  <th>
+                    <p>kategori</p>
+                  </th>                        
+                  <th>
+                    <p>lokasi</p>
+                  </th>                        
+                  <th>
+                    <p>status</p>
+                  </th>                        
+                  <th>
+                    <p>date</p>
+                  </th>                        
+                  <th>
+                    <p>Action</p>
+                  </th>
+                  </tr>
+    <!--
+        Using FOREACH LOOP for the users array
+        
+        myArray.forEach(function(el, index) {
+            // el - current element, i - index
+        });
+    -->
+    <% if (data) { %>
+    <% for(var i=1; i<data.length; i++) { %>
+                  <tr>
+                  <th>
+                    <p><%= data[i].judul %></p>
+                  </th>                        
+                  <th>
+                    <p><%= data[i].kategori %></p>
+                  </th>                        
+                  <th>
+                    <p><%= data[i].lokasi %></p>
+                  </th>                        
+                  <th>
+                    <img src=<%= data[i].photo %>>
+                  </th>                        
+                  <th>
+                    <p><%= data[i].date %></p>
+                  </th>                        
+                  <th>
+                    <a href="/laporan/<%= data._id %>" class="text-center"><p>Show</p></a>
+                  </th>
+                  </tr>
+              <% } %>
+             <% } %>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+<!--
+including footer content which is common for all pages
+-->
+<%- include ../layouts/footer.ejs %>

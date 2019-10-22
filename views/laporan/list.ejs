@@ -1,0 +1,65 @@
+<%- include ../layouts/header.ejs %>
+ 
+<% if (messages.error) { %>
+    <p style="color:red"><%- messages.error %></p>
+<% } %>
+ 
+<% if (messages.success) { %>
+    <p style="color:green"><%- messages.success %></p>
+<% } %>    
+ 
+    <section class="content container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><div class="box-title">User</div></h3>
+              <form action="/user/" method="get" class="sidebar-form">
+              <div class="input-group">
+                <input type="text" name="keyword" placeholder="Cari..." class="form-control"/>
+                <span class="input-group-btn">
+                <button type="submit" id="search-btn" class="btn btn-flat" value="Cari"><i class="fa fa-search"></i></button></span>
+              </div>
+              </form>
+            </div>
+            <div class="box-body data-table">
+            <table class="table table-bordered">
+    <!--
+        Using FOREACH LOOP for the users array
+        
+        myArray.forEach(function(el, index) {
+            // el - current element, i - index
+        });
+    -->
+    <% if (data) { %>
+    <% data.forEach(function(user){ %>
+                  <tr>
+                  <th>
+                    <p><%= user.name %></p>
+                  </th>
+                  <th>
+                    <p><%= user.age %></p>
+                  </th>
+                  <th>
+                    <p><%= user.email %></p>
+                  </th>                         
+                  <th>
+                    <p><%= user.status %></p>
+                  </th>                         
+                  <th>
+                    <a href="/admin/<%= user._id %>" class="text-center"><p>Show</p></a>
+                  </th>
+                  </tr>
+              <% }) %>
+             <% } %>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+<!--
+including footer content which is common for all pages
+-->
+<%- include ../layouts/footer.ejs %>

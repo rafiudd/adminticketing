@@ -1,0 +1,45 @@
+<%- include ../layouts/header.ejs %>
+ 
+<% if (messages.error) { %>
+    <p style="color:red"><%- messages.error %></p>
+<% } %>
+ 
+<% if (messages.success) { %>
+    <p style="color:green"><%- messages.success %></p>
+<% } %>    
+ 
+    <section class="content container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3><div class="box-title"><%= judul %></div></h3>
+            </div>
+            <div class="box-body">
+                          <p><%= kategori %></p>
+                          <p><%= ruang %></p>
+                          <p><%= status %></p>
+                      </div>
+                        <div class="box-footer">
+                        <%if( status  == "Pending"){%>
+                            <a href="\tolak\<%= id %>" class="btn btn-default btn-flat">Tolak</a>
+                            <a href="\terima\<%= id %>" class="btn btn-default btn-flat">Terima</a>
+                      <% }else if( status  == "Selesai"){%>
+                            <a href="\hapuslaporan\<%= id %>" class="btn btn-default btn-flat">Hapus</a>
+                      <% }else if( status  == "Diterima"){%>
+                            <a href="\tolak\<%= id %>" class="btn btn-default btn-flat">Tolak</a>
+                            <a href="\selesai\<%= id %>" class="btn btn-default btn-flat">Selesai</a>
+                      <% }else if( status  == "Ditolak"){%>
+                            <a href="\hapus\<%= id %>" class="btn btn-default btn-flat">Hapus</a>
+                            <a href="\terima\<%= id %>" class="btn btn-default btn-flat">Terima</a>
+                      <% }%>
+                    </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </div>
+<!--
+including footer content which is common for all pages
+-->
+<%- include ../layouts/footer.ejs %>
