@@ -49,7 +49,7 @@
     -->
     <% if (data) { %>
     <% for(var i=0; i<data.length; i++) { %>
-    <% if(data[i].status == title){ %>
+    <% if(data[i].status === title){ %>
                   <tr>
                   <td>
                     <a href="/laporan/<%= data[i].author_id %>" class="text-center"><p><%= data[i].judul %></p></a>
@@ -67,7 +67,7 @@
                   <td>
                     <a href="/ketolak/<%= data[i].author_id %>" class="text-center"><p>Tolak</p></a>
                   </td>
-        <% if(data[i].status == "Dikerjakan"){ %>
+        <% }else if(data[i].status == "Dikerjakan"){ %>
                   <td>
                     <a href="/keselesai/<%= data[i].author_id %>" class="text-center"><p>Selesai</p></a>
                   </td>

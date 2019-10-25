@@ -159,25 +159,6 @@ app.get('/laporan/(:id)', function(req, res, next) {
       res.redirect('loginpage');
     }
 })
-app.get('/keterima/(:id)', function(req, res, next) {
-    sess = req.session;
-    if(sess.username) {
-   var laporan = req.url;
-   var id_laporan = laporan.replace('/keterima/','');
-   axios.get('http://35.172.178.112:4000/me').then(response => {
-        var getData = response.data.data;
-        res.render('laporan/showlaporan', {
-            title : 'Laporan',
-            id : id_laporan,
-            data : getData
-        })
-        return response;
-    })
-    return
-    }else{
-      res.redirect('loginpage');
-    }
-})
 app.get('/ketunda/(:id)', function(req, res, next) {
     sess = req.session;
     if(sess.username) {
@@ -185,6 +166,18 @@ app.get('/ketunda/(:id)', function(req, res, next) {
    var id_laporan = laporan.replace('/ketunda/','');
    axios.put('http://35.172.178.112:4000/pengaduan/'+id_laporan,{
     status : "Ditunda"});
+    res.redirect('/');
+    }else{
+      res.redirect('loginpage');
+    }
+})
+app.get('/keterima/(:id)', function(req, res, next) {
+    sess = req.session;
+    if(sess.username) {
+   var laporan = req.url;
+   var id_laporan = laporan.replace('/keterima/','');
+   axios.put('http://35.172.178.112:4000/pengaduan/'+id_laporan,{
+    status : "Diterima"});
     res.redirect('/');
     }else{
       res.redirect('loginpage');
@@ -218,7 +211,7 @@ app.get('/kerjakan/(:id)', function(req, res, next) {
     sess = req.session;
     if(sess.username) {
    var laporan = req.url;
-   var id_laporan = laporan.replace('/keselesai/','');
+   var id_laporan = laporan.replace('/kerjakan/','');
     axios.put('http://35.172.178.112:4000/pengaduan/'+id_laporan,{
     status : "Dikerjakan"});
     res.redirect('/');
