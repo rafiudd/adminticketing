@@ -17,7 +17,6 @@ app.get('/', function(req, res, next) {
         axios.get('http://35.172.178.112:4000/me').then(response => {
       var getData = response.data.data;
       res.render('laporan/all', {
-            name : sess.username,
             title : 'Semua',
             subtitle : 'Dashboard Semua Data',
         data : getData
@@ -40,7 +39,7 @@ app.get('/loginpage',(req,res) => {
              if(user ===null){
                res.render('admin/login');
              }else if (user.username === req.body.username && user.password === req.body.password){
-            res.end(user.username);
+            res.end("done");
           } else {
                 res.render('admin/login');
           }
@@ -80,6 +79,23 @@ app.get('/diterima', function(req, res, next) {
       var getData = response.data.data;
       res.render('laporan/laporan', {
         title : 'Diterima',
+        subtitle : 'Dashboard Diterima',
+            data : getData
+      })
+      return response;
+    })
+    return
+    }else{
+      res.redirect('loginpage');
+    }
+})
+app.get('/dikerjakan', function(req, res, next) {
+    sess = req.session;
+    if(sess.username) {
+    axios.get('http://35.172.178.112:4000/me').then(response => {
+      var getData = response.data.data;
+      res.render('laporan/laporan', {
+        title : 'Dikerjakan',
         subtitle : 'Dashboard Diterima',
             data : getData
       })
@@ -198,6 +214,18 @@ app.get('/keselesai/(:id)', function(req, res, next) {
       res.redirect('loginpage');
     }
 })
+app.get('/kerjakan/(:id)', function(req, res, next) {
+    sess = req.session;
+    if(sess.username) {
+   var laporan = req.url;
+   var id_laporan = laporan.replace('/keselesai/','');
+    axios.put('http://35.172.178.112:4000/pengaduan/'+id_laporan,{
+    status : "Dikerjakan"});
+    res.redirect('/');
+    }else{
+      res.redirect('loginpage');
+    }
+})
 app.get('/kehapus/(:id)', function(req, res, next) {
     sess = req.session;
     if(sess.username) {
@@ -205,23 +233,6 @@ app.get('/kehapus/(:id)', function(req, res, next) {
    var id_laporan = laporan.replace('/kehapus/','');
    axios.delete('http://35.172.178.112:4000/pengaduan/'+id_laporan);
    res.redirect('/');
-    }else{
-      res.redirect('loginpage');
-    }
-})
-
-app.get('/admin', function(req, res, next) {
-    sess = req.session;
-    if(sess.username) {
-    axios.get('http://35.172.178.112:4000/me').then(response => {
-        var getData = response.data.data;
-        res.render('admin/admin', {
-        title : 'Admin',
-        subtitle : 'Dashboard Admin',
-        data : getData
-        })
-        return response;
-    })
     }else{
       res.redirect('loginpage');
     }

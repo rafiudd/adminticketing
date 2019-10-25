@@ -24,7 +24,7 @@ $(document).ready(function(){
         * Perform some validation here.
         */
         $.post("/login",{username:username,password:password},function(data){
-            if(data=== username) {
+            if(data=== "done") {
                 window.location.href="/";
             }
         });

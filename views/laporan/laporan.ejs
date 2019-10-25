@@ -62,10 +62,17 @@
                   </td>                        
         <% if(data[i].status == "Diterima"){ %>
                   <td>
+                    <a href="/kerjakan/<%= data[i].author_id %>" class="text-center"><p>Kerjakan</p></a>
+                  </td>
+                  <td>
+                    <a href="/ketolak/<%= data[i].author_id %>" class="text-center"><p>Tolak</p></a>
+                  </td>
+        <% if(data[i].status == "Dikerjakan"){ %>
+                  <td>
                     <a href="/keselesai/<%= data[i].author_id %>" class="text-center"><p>Selesai</p></a>
                   </td>
                   <td>
-                    <a href="/ketolaj/<%= data[i].author_id %>" class="text-center"><p>Tolak</p></a>
+                    <a href="/keterima/<%= data[i].author_id %>" class="text-center"><p>Terima</p></a>
                   </td>
         <% }else if(data[i].status == "Ditolak"){ %>
                   <td>
@@ -83,7 +90,7 @@
                   </td>
         <% }else if(data[i].status == "Selesai"){ %>
                   <td>
-                    <a href="/keterima/<%= data[i].author_id %>" class="text-center"><p>Diterima</p></a>
+                    <a href="/kerjakan/<%= data[i].author_id %>" class="text-center"><p>Kerjakan</p></a>
                   </td>
                   <td>
                     <a href="/kehapus/<%= data[i].author_id %>" class="text-center"><p>Hapus</p></a>
