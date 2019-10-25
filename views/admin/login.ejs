@@ -25,7 +25,7 @@ $(document).ready(function(){
         */
         $.post("/login",{username:username,password:password},function(data){
             if(data=== username) {
-                window.location.href="/head";
+                window.location.href="/";
             }
         });
     });
