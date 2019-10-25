@@ -1,6 +1,6 @@
 var express = require('express')
 var app = express()
- 
+var session = require('express-session') 
 var ObjectId = require('mongodb').ObjectId
 var expressMongoDb = require('express-mongo-db');
 /**
@@ -12,14 +12,6 @@ var config = require('./config')
 app.use(express.static(__dirname + '/public'));
 app.use(expressMongoDb(config.database.url));
  
-var auth = require('http-auth');
-var basic = auth.basic({
-        realm: "Silahkan Login?"
-    }, (username, password, callback) => { 
-        callback(username === "admin" && password === "admin");
-    }
-);
-app.use(auth.connect(basic));
 /**
  * setting up the templating view engine
  */ 
@@ -30,7 +22,6 @@ app.set('view engine', 'ejs')
  * import routes/users.js
  */ 
 var index = require('./routes/index')
- 
 /**
  * Express Validator Middleware for Form Validation
  */ 

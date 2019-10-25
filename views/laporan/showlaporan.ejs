@@ -8,32 +8,42 @@
     <p style="color:green"><%- messages.success %></p>
 <% } %>    
  
-    <section class="content container-fluid">
+     <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        <%= title %>
+      </h1>
+    </section>
+ <section class="content container-fluid">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
+    <% if (data) { %>
+    <% for(var i=0; i<data.length; i++) { %>
+    <% if (data[i].author_id == id) { %>
             <div class="box-header">
-              <h3><div class="box-title"><%= judul %></div></h3>
+              <h3><div class="box-title"><%= data[i].judul %></div></h3>
             </div>
             <div class="box-body">
-                          <p><%= kategori %></p>
-                          <p><%= ruang %></p>
-                          <p><%= status %></p>
+                          <p><%= data[i].kategori %></p>
+                          <p><%= data[i].ruang %></p>
+                          <p><%= data[i].status %></p>
                       </div>
                         <div class="box-footer">
-                        <%if( status  == "Pending"){%>
-                            <a href="\tolak\<%= id %>" class="btn btn-default btn-flat">Tolak</a>
-                            <a href="\terima\<%= id %>" class="btn btn-default btn-flat">Terima</a>
-                      <% }else if( status  == "Selesai"){%>
-                            <a href="\hapuslaporan\<%= id %>" class="btn btn-default btn-flat">Hapus</a>
-                      <% }else if( status  == "Diterima"){%>
-                            <a href="\tolak\<%= id %>" class="btn btn-default btn-flat">Tolak</a>
-                            <a href="\selesai\<%= id %>" class="btn btn-default btn-flat">Selesai</a>
-                      <% }else if( status  == "Ditolak"){%>
-                            <a href="\hapus\<%= id %>" class="btn btn-default btn-flat">Hapus</a>
-                            <a href="\terima\<%= id %>" class="btn btn-default btn-flat">Terima</a>
+                        <%if( data[i].status  == "Ditunda"){%>
+                            <a href="/ketolak/<%= data[i].author_id %>" class="btn btn-default btn-flat">Tolak</a>
+                            <a href="/keterima/<%= data[i].author_id %>" class="btn btn-default btn-flat">Terima</a>
+                      <% }else if( data[i].status  == "Selesai"){%>
+                            <a href="/kehapus/<%= data[i].author_id %>" class="btn btn-default btn-flat">Hapus</a>
+                      <% }else if( data[i].status  == "Diterima"){%>
+                            <a href="/ketolak/<%= data[i].author_id %>" class="btn btn-default btn-flat">Tolak</a>
+                            <a href="/keselesai/<%= data[i].author_id %>" class="btn btn-default btn-flat">Selesai</a>
+                      <% }else if( data[i].status  == "Ditolak"){%>
+                            <a href="/kehapus/<%= data[i].author_id %>" class="btn btn-default btn-flat">Hapus</a>
+                            <a href="/keterima/<%= data[i].author_id %>" class="btn btn-default btn-flat">Terima</a>
                       <% }%>
                     </div>
+              <% }}} %>
             </div>
         </div>
       </div>

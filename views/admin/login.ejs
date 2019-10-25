@@ -1,0 +1,87 @@
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/dist/css/skins/skin-blue.min.css">
+ <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/dist/js/adminlte.min.js"></script>
+        <title>Laporan</title>
+  <script>
+$(document).ready(function(){
+    var username,password;
+    $("#submit").click(function(){
+        username=$("#username").val();
+        password=$("#password").val();
+        /*
+        * Perform some validation here.
+        */
+        $.post("/login",{username:username,password:password},function(data){
+            if(data=== username) {
+                window.location.href="/head";
+            }
+        });
+    });
+});
+</script>
+    </head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <header class="main-header">
+    <a href="\" class="logo">
+      <span class="logo-mini"><b>AT</b></span>
+      <span class="logo-lg"><b>Admin Ticketing</b></span>
+    </a>
+    <nav class="navbar navbar-static-top" role="navigation">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+    </nav>
+  </header>
+  <div class="content-wrapper">
+    <section class="content-header">
+    </section>
+ 
+<% if (messages.error) { %>
+    <p style="color:red"><%- messages.error %></p>
+<% } %>
+ 
+<% if (messages.success) { %>
+    <p style="color:green"><%- messages.success %></p>
+<% } %>    
+ 
+    <section class="content container-fluid">
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h1><span class="fa fa-sign-in"></span> Login</h1>
+
+   
+    <!-- LOGIN FORM -->
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" size="40" placeholder="Type your username" id="username" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" size="40" placeholder="Type your password" id="password" class="form-control">
+        </div>
+        <input type="button" value="Submit" id="submit" class="btn btn-warning btn-lg">
+    </form>
+
+    <hr>
+
+   </div>      </div>
+    </section>
+  </div>
+<!--
+including footer content which is common for all pages
+-->
+<%- include ../layouts/footer.ejs %>
