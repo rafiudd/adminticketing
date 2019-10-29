@@ -12,8 +12,8 @@
       <%}%>
       </ul>
     </section>
-    </aside>
-<div class="content-wrapper">
+  </aside>
+     <div class="content-wrapper">
     <section class="content-header">
       <h1>
         <%= title %>
@@ -24,22 +24,20 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title"><div class="box-title"><%= subtitle %></div></h3>
+              <h3 class="box-title"><div class="box-title"><%= subtitle %></div></h3><br>
+              <a href="/registeradmin" class="pull-left btn btn-primary"><i class="fa fa-plus">Add Admin</i></a>
             </div>
             <div class="box-body data-table">
             <table class="table table-bordered">
                   <tr>
                   <th>
-                    <p class="text-center">Judul</p>
-                  </th>                        
-                  <th>
-                    <p class="text-center">Kategori</p>
-                  </th>                        
-                  <th>
-                    <p class="text-center">Lokasi</p>
+                    <p class="text-center">Nama</p>
                   </th>                        
                   <th>
                     <p class="text-center">Status</p>
+                  </th>                        
+                  <th>
+                    <p class="text-center">Action</p>
                   </th>                        
                   <th>
                     <p class="text-center">Action</p>
@@ -56,19 +54,16 @@
     <% for(var i=0; i<data.length; i++) { %>
                   <tr>
                   <td>
-                    <p class="text-center"><%= data[i].judul %></p>
-                  </td>                        
-                  <td>
-                    <p class="text-center"><%= data[i].kategori %></p>
-                  </td>                        
-                  <td>
-                    <p class="text-center"><%= data[i].lokasi %></p>
+                    <p class="text-center"><%= data[i].username %></p>
                   </td>                        
                   <td>
                     <p class="text-center"><%= data[i].status %></p>
                   </td>                        
                   <td>
-                    <a href="/laporan/<%= data[i].author_id %>" class="text-center"><p>Show</p></a>
+                    <a href="/editadmin/<%= data[i]._id %>" class="text-center"><p>Edit</p></a>
+                  </td>
+                  <td>
+                    <a href="/deleteadmin/<%= data[i]._id %>" class="text-center"><p>Delete</p></a>
                   </td>
                   </tr>
               <% } %>

@@ -7,8 +7,13 @@
 <% if (messages.success) { %>
     <p style="color:green"><%- messages.success %></p>
 <% } %>    
- 
-     <div class="content-wrapper">
+<% if (status == "SuperAdmin") { %>
+        <li><a href="\admin"><i class="fa fa-link"></i> <span>Admin</span></a></li>
+      <%}%>
+      </ul>
+    </section>
+   </aside>
+   <div class="content-wrapper">
     <section class="content-header">
       <h1>
         <%= title %>
@@ -29,7 +34,8 @@
                           <p><%= data[i].ruang %></p>
                           <p><%= data[i].status %></p>
                       </div>
-                        <div class="box-footer">
+                           <% if(status == "SuperAdmin" || status == "Admin1"){ %>
+                       <div class="box-footer">
                         <%if( data[i].status  == "Ditunda"){%>
                             <a href="/ketolak/<%= data[i].author_id %>" class="btn btn-default btn-flat">Tolak</a>
                             <a href="/keterima/<%= data[i].author_id %>" class="btn btn-default btn-flat">Terima</a>
@@ -49,6 +55,7 @@
                     </div>
               <% }}} %>
             </div>
+            <%}%>
         </div>
       </div>
     </section>

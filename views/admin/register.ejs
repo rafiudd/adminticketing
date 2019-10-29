@@ -14,6 +14,25 @@
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/dist/js/adminlte.min.js"></script>
         <title>Laporan</title>
+  <script>
+$(document).ready(function(){
+    var username,password,status;
+    $("#submit").click(function(){
+        username=$("#username").val();
+        password=$("#password").val();
+        status=$("#status").val();
+        /*
+        * Perform some validation here.
+        */
+            $.post("/register",{username:username,password:password,status:status},function(data){
+            if(data=== "done") {
+                window.location.href="/admin";
+            }
+        });
+
+    });
+});
+</script>
     </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -49,3 +68,54 @@
         <li><a href="\ditolak"><i class="fa fa-link"></i> <span>Ditolak</span></a></li>
         <li><a href="\dikerjakan"><i class="fa fa-link"></i> <span>Dikerjakan</span></a></li>
         <li><a href="\selesai"><i class="fa fa-link"></i> <span>Selesai</span></a></li>
+        <li><a href="\admin"><i class="fa fa-link"></i> <span>Admin</span></a></li>
+      </ul>
+    </section>
+    </aside>
+  <div class="content-wrapper">
+    <section class="content-header">
+    </section>
+ 
+<% if (messages.error) { %>
+    <p style="color:red"><%- messages.error %></p>
+<% } %>
+ 
+<% if (messages.success) { %>
+    <p style="color:green"><%- messages.success %></p>
+<% } %>    
+ 
+    <section class="content container-fluid">
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h1>Register</h1>
+
+   
+    <!-- LOGIN FORM -->
+    <form action="/register" method="post">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" size="40" placeholder="Type your username" id="username" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" size="40" placeholder="Type your password" id="password" class="form-control">
+        </div>
+        <div class="form-group">
+        <select id="status" class="form-control">
+          <option value="SuperAdmin">Super Admin</option>
+          <option value="Admin1">Admin 1</option>
+          <option value="Admin2">Admin 2</option>
+        </select>
+        </div>        
+        <input type="button" value="Submit" id="submit" class="btn btn-warning btn-lg">
+    </form>
+
+    <hr>
+
+   </div>      </div>
+    </section>
+  </div>
+<!--
+including footer content which is common for all pages
+-->
+<%- include ../layouts/footer.ejs %>
