@@ -73,15 +73,10 @@ app.use(methodOverride(function (req, res) {
  * cookie-parser & session modules
  */ 
 var flash = require('express-flash')
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
- 
-app.use(cookieParser('keyboard cat'))
 app.use(session({ 
     secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    resave: true,
+    saveUninitialized: false
 }))
 app.use(flash())
  

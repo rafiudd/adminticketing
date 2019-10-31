@@ -26,31 +26,48 @@
     <% if (data) { %>
     <% for(var i=0; i<data.length; i++) { %>
     <% if (data[i].author_id == id) { %>
-            <div class="box-header">
-              <h3><div class="box-title"><%= data[i].judul %></div></h3>
+            <div class="box-header" style="display:inline-block;margin-top:20px;margin-left:20px">
+              <img src="<%= data[i].photo %>" alt="User Image" style="width: 250px; height:250px;border-radius:10px;">
             </div>
-            <div class="box-body">
-                          <p><%= data[i].kategori %></p>
-                          <p><%= data[i].ruang %></p>
-                          <p><%= data[i].status %></p>
+            <div class="box-body" style="display:inline-block">
+            <div class="judul">
+              <h1 style="display:inline-block"><%= data[i].judul %></h1>
+              <%if( data[i].status  == "Ditunda"){%>
+              <label style="display:inline-block;border:1px;padding:10px 10px 10px 10px;background:#FDDEC7;font-size:20px;margin-left:50px;border-radius:5px;color:#FC7D2E"><%= data[i].status %></label>
+              <% }else if( data[i].status  == "Selesai"){%>
+              <label style="display:inline-block;border:1px;padding:10px 10px 10px 10px;background:#5e8deb;font-size:20px;margin-left:50px;border-radius:5px;color:#1c4cad"><%= data[i].status %></label>
+              <% }else if( data[i].status  == "Diterima"){%>
+              <label style="display:inline-block;border:1px;padding:10px 10px 10px 10px;background:#BDECC1;font-size:20px;margin-left:50px;border-radius:5px;color:#25BE34"><%= data[i].status %></label>
+              <% }else if( data[i].status  == "Ditolak"){%>
+              <label style="display:inline-block;border:1px;padding:10px 10px 10px 10px;background:#FECDC7;font-size:20px;margin-left:50px;border-radius:5px;color:#FA604E"><%= data[i].status %></label>
+              <% }else if( data[i].status  == "Dikerjakan"){%>
+              <label style="display:inline-block;border:1px;padding:10px 10px 10px 10px;background:#FDDEC7;font-size:20px;margin-left:50px;border-radius:5px;color:#FC7D2E"><%= data[i].status %></label>
+              <%}%>
+            </div>
+            <div class="isi">
+              <p style="color:#7a7b7d;display:inline-block"><%= data[i].pelapor %></p>
+              <p style="color:#7a7b7d;display:inline-block"><%= data[i].lokasi %></p>
+              <p style="color:#7a7b7d;display:inline-block"><%= data[i].date %></p>
+              <h4><%= data[i].isipengaduan %></h4>
+            </div>
                       </div>
                            <% if(status == "SuperAdmin" || status == "Admin1"){ %>
-                       <div class="box-footer">
+                       <div class="box-footer" style="margin-left:20px">
                         <%if( data[i].status  == "Ditunda"){%>
-                            <a href="/ketolak/<%= data[i].author_id %>" class="btn btn-default btn-flat">Tolak</a>
-                            <a href="/keterima/<%= data[i].author_id %>" class="btn btn-default btn-flat">Terima</a>
+                            <a href="/ketolak/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#FECDC7;font-size:20px;border-radius:5px;color:#FA604E;height:50px;width:120px">Tolak</a>
+                            <a href="/keterima/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#BDECC1;font-size:20px;border-radius:5px;color:#25BE34;height:50px;width:120px">Terima</a>
                       <% }else if( data[i].status  == "Selesai"){%>
-                            <a href="/kerjakan/<%= data[i].author_id %>" class="btn btn-default btn-flat">Kerjakan</a>
-                            <a href="/kehapus/<%= data[i].author_id %>" class="btn btn-default btn-flat">Hapus</a>
+                            <a href="/kehapus/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#FECDC7;font-size:20px;border-radius:5px;color:#FA604E;height:50px;width:120px">Hapus</a>
+                            <a href="/kerjakan/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#BDECC1;font-size:20px;border-radius:5px;color:#25BE34;height:50px;width:120px">Kerjakan</a>
                       <% }else if( data[i].status  == "Diterima"){%>
-                            <a href="/ketolak/<%= data[i].author_id %>" class="btn btn-default btn-flat">Tolak</a>
-                            <a href="/kerjakan/<%= data[i].author_id %>" class="btn btn-default btn-flat">Kerjakan</a>
+                            <a href="/ketolak/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#FECDC7;font-size:20px;border-radius:5px;color:#FA604E;height:50px;width:120px">Tolak</a>
+                            <a href="/kerjakan/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#BDECC1;font-size:20px;border-radius:5px;color:#25BE34;height:50px;width:120px">Kerjakan</a>
                       <% }else if( data[i].status  == "Ditolak"){%>
-                            <a href="/kehapus/<%= data[i].author_id %>" class="btn btn-default btn-flat">Hapus</a>
-                            <a href="/keterima/<%= data[i].author_id %>" class="btn btn-default btn-flat">Terima</a>
+                            <a href="/kehapus/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#FECDC7;font-size:20px;border-radius:5px;color:#FA604E;height:50px;width:120px">Hapus</a>
+                            <a href="/keterima/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#BDECC1;font-size:20px;border-radius:5px;color:#25BE34;height:50px;width:120px">Terima</a>
                       <% }else if( data[i].status  == "Dikerjakan"){%>
-                            <a href="/keterima/<%= data[i].author_id %>" class="btn btn-default btn-flat">Terima</a>
-                            <a href="/keselesai/<%= data[i].author_id %>" class="btn btn-default btn-flat">Selesai</a>
+                            <a href="/keterima/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#FECDC7;font-size:20px;border-radius:5px;color:#FA604E;height:50px;width:120px">Terima</a>
+                            <a href="/keselesai/<%= data[i].author_id %>" class="btn btn-default btn-flat" style="padding:10px 20px 10px 20px;background:#BDECC1;font-size:20px;border-radius:5px;color:#25BE34;height:50px;width:120px">Selesai</a>
                       <% }%>
                     </div>
               <% }}} %>
