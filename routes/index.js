@@ -9,7 +9,7 @@ var session = require('express-session')
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/admin';
+var url = 'mongodb://localhost:27017/ticketing';
 var sess;
 app.get('/', function(req, res, next) {
     sess = req.session;
@@ -181,9 +181,10 @@ app.get('/loginpage',(req,res) => {
              if(user ===null){
                res.render('admin/login');
              }else if (user.username === req.body.username && user.password === req.body.password){
-            res.end("done");
+            
           sess.username = user.username;
             sess.status = user.status;
+            return res.end("done");
           } else {
                 res.render('admin/login');
           }
