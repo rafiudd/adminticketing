@@ -55,18 +55,18 @@ app.post('/register',urlencodedParser,function(req,res){
         "status":status, 
         "password":password
     } 
-   MongoClient.connect(url, function(db,err) {
+   MongoClient.connect(url,{useNewUrlParser: true, useUnifiedTopology: true}, function(db,err) {
    req.db.collection('admin').findOne({ username: username}, function(err, user) {
              if(user ===null){
 req.db.collection('admin').insertOne(data,function(err, collection){ 
         if (err) throw err; 
-            res.end("done");
+            return res.end("done");
               
     }); 
              }else if (user.username === username){
-            res.end("done");
+            return res.end("done");
           } else {
-            res.end("done");
+            return res.end("done");
           }
    });
  });
@@ -144,10 +144,10 @@ app.post('/editadm/(:id)',urlencodedParser,function(req,res,next){
         status:status, 
         password:password
     } 
-   MongoClient.connect(url, function(db,err) {
+   MongoClient.connect(url,{useNewUrlParser: true, useUnifiedTopology: true}, function(db,err) {
 req.db.collection('admin').updateOne({"_id": aid}, data,function(err, collection){ 
         if (err) throw err; 
-            res.end("done");              
+          return res.end("done");              
     }); 
  });
            }else{
@@ -159,7 +159,7 @@ app.get('/deleteadmin/(:id)', function(req, res, next) {
     sess = req.session;
     if(sess.username && sess.status == "SuperAdmin") {
         var o_id = new ObjectId(req.params.id)
-    req.db.collection('admin').remove({"_id": o_id}, function(err, result) {
+    req.db.collection('admin').deleteOne({"_id": o_id}, function(err, result) {
         if (err) {
             res.redirect('/admin')
         } else {
@@ -176,23 +176,23 @@ app.get('/loginpage',(req,res) => {
 });
  app.post('/login',urlencodedParser,function(req,res){
     sess = req.session;
-   MongoClient.connect(url, function(db,err) {
+    if (req.body.username == "admin" && req.body.password == "admin"){
+          sess.username = "admin";
+          sess.status = "SuperAdmin";
+          return res.end("done");
+          }
+   MongoClient.connect(url,{useNewUrlParser: true, useUnifiedTopology: true}, function(db,err) {
    req.db.collection('admin').findOne({ username: req.body.username}, function(err, user) {
              if(user ===null){
                res.render('admin/login');
              }else if (user.username === req.body.username && user.password === req.body.password){
-            res.end("done");
           sess.username = user.username;
             sess.status = user.status;
+            return res.end("done");
           } else {
                 res.render('admin/login');
           }
-   });if (req.body.username == "admin" && req.body.password == "admin"){
-            res.end("done");
-          sess.username = "admin";
-            sess.status = "SuperAdmin";
-          }
- });
+   });});
 });
 app.get('/logout',(req,res) => {
     req.session.destroy((err) => {
