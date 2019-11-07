@@ -390,6 +390,4 @@ app.get('/kehapus/(:id)', function(req, res, next) {
       res.redirect('/loginpage');
     }
 })
-
-
 module.exports = app;
