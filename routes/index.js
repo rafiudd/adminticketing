@@ -9,7 +9,6 @@ var session = require('express-session')
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/admin';
 var sess;
 app.get('/', function(req, res, next) {
     sess = req.session;
