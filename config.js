@@ -1,6 +1,6 @@
 var config = {
     database: {
-//        url: 'mongodb://localhost:27017/ticketing'
+        url: 'mongodb://admin:admin@127.0.0.1:27017/ticketing'
     },
     server: {
         host: 'http://34.204.70.171',

@@ -10,7 +10,7 @@ var expressMongoDb = require('express-mongo-db');
  */ 
 var config = require('./config')
 app.use(express.static(__dirname + '/public'));
-// app.use(expressMongoDb(config.database.url));
+app.use(expressMongoDb(config.database.url));
  
 /**
  * setting up the templating view engine
