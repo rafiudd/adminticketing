@@ -224,7 +224,7 @@ app.get('/ditunda', function(req, res, next) {
 app.get('/diterima', function(req, res, next) {
     sess = req.session;
     if(sess.username && sess.status) {
-    axios.get('http://35.172.178.1124000/me').then(response => {
+    axios.get('http://35.172.178.112:4000/me').then(response => {
       var getData = response.data.data;
       res.render('laporan/laporan', {
             name : sess.username,
