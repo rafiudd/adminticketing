@@ -1,10 +1,10 @@
 var config = {
     database: {
-        url: 'mongodb://localhost:27017/ticketing'
+//        url: 'mongodb://localhost:27017/ticketing'
     },
     server: {
-        host: '0.0.0.0',
-        port: '9003'
+        host: 'http://34.204.70.171',
+        port: '8000'
     }
 }
  
