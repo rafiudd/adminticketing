@@ -13,7 +13,7 @@ var sess;
 app.get('/', function(req, res, next) {
     sess = req.session;
     if(sess.username && sess.status) {
-        axios.get('http://35.172.178.112:4000/me').then(response => {
+        axios.get('http://54.167.107.139:4000/me').then(response => {
       var getData = response.data.data.reverse();
       res.render('laporan/all', {
             name : sess.username,
@@ -205,7 +205,7 @@ app.get('/logout',(req,res) => {
 app.get('/ditunda', function(req, res, next) {
     sess = req.session;
     if(sess.username && sess.status) {
-    axios.get('http://35.172.178.112:4000/me').then(response => {
+    axios.get('http://54.167.107.139:4000/me').then(response => {
       var getData = response.data.data;
       res.render('laporan/laporan', {
         title : 'Ditunda',
@@ -224,7 +224,7 @@ app.get('/ditunda', function(req, res, next) {
 app.get('/diterima', function(req, res, next) {
     sess = req.session;
     if(sess.username && sess.status) {
-    axios.get('http://35.172.178.112:4000/me').then(response => {
+    axios.get('http://54.167.107.139:4000/me').then(response => {
       var getData = response.data.data;
       res.render('laporan/laporan', {
             name : sess.username,
@@ -243,7 +243,7 @@ app.get('/diterima', function(req, res, next) {
 app.get('/dikerjakan', function(req, res, next) {
     sess = req.session;
     if(sess.username && sess.status) {
-    axios.get('http://35.172.178.112:4000/me').then(response => {
+    axios.get('http://54.167.107.139:4000/me').then(response => {
       var getData = response.data.data;
       res.render('laporan/laporan', {
             name : sess.username,
@@ -262,7 +262,7 @@ app.get('/dikerjakan', function(req, res, next) {
 app.get('/ditolak', function(req, res, next) {
     sess = req.session;
     if(sess.username && sess.status) {
-    axios.get('http://35.172.178.112:4000/me').then(response => {
+    axios.get('http://54.167.107.139:4000/me').then(response => {
       var getData = response.data.data;
       res.render('laporan/laporan', {
             name : sess.username,
@@ -281,7 +281,7 @@ app.get('/ditolak', function(req, res, next) {
 app.get('/selesai', function(req, res, next) {
     sess = req.session;
     if(sess.username && sess.status) {
-    axios.get('http://35.172.178.112:4000/me').then(response => {
+    axios.get('http://54.167.107.139:4000/me').then(response => {
       var getData = response.data.data;
       res.render('laporan/laporan', {
             name : sess.username,
@@ -302,7 +302,7 @@ app.get('/laporan/(:id)', function(req, res, next) {
     if(sess.username && sess.status) {
    var laporan = req.url;
    var id_laporan = laporan.replace('/laporan/','');
-   axios.get('http://35.172.178.112:4000/me').then(response => {
+   axios.get('http://54.167.107.139:4000/me').then(response => {
         var getData = response.data.data;
         res.render('laporan/showlaporan', {
             name : sess.username,
@@ -323,9 +323,10 @@ app.get('/ketunda/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/ketunda/','');
-   axios.put('http://35.172.178.112:4000/pengaduan/'+id_laporan,{
-    status : "Ditunda"});
-    res.redirect('/');
+   const date = Date(Date.now());
+   axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
+    status : "Ditunda",date : date});
+    res.redirect('/ditunda');
     }else{
       res.redirect('/loginpage');
     }
@@ -335,9 +336,10 @@ app.get('/keterima/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/keterima/','');
-   axios.put('http://35.172.178.112:4000/pengaduan/'+id_laporan,{
-    status : "Diterima"});
-    res.redirect('/');
+   const date = Date(Date.now());
+   axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
+    status : "Diterima",date : date});
+    res.redirect('/diterima');
     }else{
       res.redirect('/loginpage');
     }
@@ -347,9 +349,10 @@ app.get('/ketolak/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/ketolak/','');
-   axios.put('http://35.172.178.112:4000/pengaduan/'+id_laporan,{
-    status : "Ditolak"});
-    res.redirect('/');
+   const date = Date(Date.now());
+   axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
+    status : "Ditolak",date : date});
+    res.redirect('/ditolak');
     }else{
       res.redirect('/loginpage');
     }
@@ -359,9 +362,10 @@ app.get('/keselesai/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/keselesai/','');
-    axios.put('http://35.172.178.112:4000/pengaduan/'+id_laporan,{
-    status : "Selesai"});
-    res.redirect('/');
+   const date = Date(Date.now());
+    axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
+    status : "Selesai",date : date});
+    res.redirect('/selesai');
     }else{
       res.redirect('/loginpage');
     }
@@ -371,9 +375,10 @@ app.get('/kerjakan/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/kerjakan/','');
-    axios.put('http://35.172.178.112:4000/pengaduan/'+id_laporan,{
-    status : "Dikerjakan"});
-    res.redirect('/');
+   const date = Date(Date.now());
+    axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
+    status : "Dikerjakan",date : date});
+    res.redirect('/dikerjakan');
     }else{
       res.redirect('/loginpage');
     }
@@ -383,7 +388,7 @@ app.get('/kehapus/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/kehapus/','');
-   axios.delete('http://35.172.178.112:4000/pengaduan/'+id_laporan);
+   axios.delete('http://54.167.107.139:4000/pengaduan/'+id_laporan);
    res.redirect('/');
     }else{
       res.redirect('/loginpage');

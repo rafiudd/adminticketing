@@ -27,24 +27,29 @@
               <h3 class="box-title"><div class="box-title"><%= subtitle %></div></h3>
             </div>
             <div class="box-body data-table">
-            <table class="table table-bordered">
+            <table id="example" class="display table-bordered">
+              <thead>
                   <tr>
                   <th>
-                    <p class="text-center">Judul</p>
+                    Judul
                   </th>                        
                   <th>
-                    <p class="text-center">Kategori</p>
+                    Kategori
                   </th>                        
                   <th>
-                    <p class="text-center">Lokasi</p>
+                    Lokasi
                   </th>                        
                   <th>
-                    <p class="text-center">Status</p>
+                    Waktu
                   </th>                        
                   <th>
-                    <p class="text-center">Action</p>
+                    Status
+                  </th>                        
+                  <th>
+                    Action
                   </th>
                   </tr>
+              </thead>              
     <!--
         Using FOREACH LOOP for the users array
         
@@ -52,27 +57,32 @@
             // el - current element, i - index
         });
     -->
+              <tbody>
     <% if (data) { %>
     <% for(var i=0; i<data.length; i++) { %>
                   <tr>
                   <td>
-                    <p class="text-center"><%= data[i].judul %></p>
+                    <%= data[i].judul %>
                   </td>                        
                   <td>
-                    <p class="text-center"><%= data[i].kategori %></p>
+                    <%= data[i].kategori %>
                   </td>                        
                   <td>
-                    <p class="text-center"><%= data[i].lokasi %></p>
+                    <%= data[i].lokasi %>
                   </td>                        
                   <td>
-                    <p class="text-center"><%= data[i].status %></p>
+                    <%= data[i].date %>
                   </td>                        
                   <td>
-                    <a href="/laporan/<%= data[i].author_id %>" class="text-center"><p style="color: #EF3E5A;">Show</p></a>
+                    <%= data[i].status %>
+                  </td>                        
+                  <td>
+                    <a href="/laporan/<%= data[i].author_id %>" class="text-center"><p style="color: #EF3E5A;">Show</a>
                   </td>
                   </tr>
               <% } %>
              <% } %>
+             </tbody>
             </table>
             </div>
           </div>
