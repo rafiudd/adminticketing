@@ -28,13 +28,17 @@
               <h3 class="box-title"><div class="box-title"><%= subtitle %></div></h3>
             </div>
             <div class="box-body data-table">
-            <table class="table table-bordered">
+            <table id="example" class="display table-bordered">
+                <thead>
                   <tr>
                   <th>
                     <p class="text-center">Judul</p>
                   </th>                        
                   <th>
                     <p class="text-center">Kategori</p>
+                  </th>                        
+                  <th>
+                    <p class="text-center">Tanggal</p>
                   </th>                        
                   <th>
                     <p class="text-center">Lokasi</p>
@@ -48,6 +52,7 @@
                   </th>                        
                   <%}%>
                   </tr>
+                </thead>
     <!--
         Using FOREACH LOOP for the users array
         
@@ -55,6 +60,7 @@
             // el - current element, i - index
         });
     -->
+                <tbody>
     <% if (data) { %>
     <% for(var i=0; i<data.length; i++) { %>
     <% if(data[i].status === title){ %>
@@ -64,6 +70,9 @@
                   </td>                        
                   <td>
                     <p class="text-center"><%= data[i].kategori %></p>
+                  </td>                        
+                  <td>
+                    <p class="text-center"><%= data[i].date %></p>
                   </td>                        
                   <td>
                     <p class="text-center"><%= data[i].lokasi %></p>
@@ -107,6 +116,7 @@
                   </tr>
               <% }} %>
              <% }}} %>
+             </tbody>
             </table>
             </div>
           </div>

@@ -323,9 +323,10 @@ app.get('/ketunda/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/ketunda/','');
+   const date = Date(Date.now());
    axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
-    status : "Ditunda"});
-    res.redirect('/');
+    status : "Ditunda",date : date});
+    res.redirect('/ditunda');
     }else{
       res.redirect('/loginpage');
     }
@@ -335,9 +336,10 @@ app.get('/keterima/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/keterima/','');
+   const date = Date(Date.now());
    axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
-    status : "Diterima"});
-    res.redirect('/');
+    status : "Diterima",date : date});
+    res.redirect('/diterima');
     }else{
       res.redirect('/loginpage');
     }
@@ -347,9 +349,10 @@ app.get('/ketolak/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/ketolak/','');
+   const date = Date(Date.now());
    axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
-    status : "Ditolak"});
-    res.redirect('/');
+    status : "Ditolak",date : date});
+    res.redirect('/ditolak');
     }else{
       res.redirect('/loginpage');
     }
@@ -359,9 +362,10 @@ app.get('/keselesai/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/keselesai/','');
+   const date = Date(Date.now());
     axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
-    status : "Selesai"});
-    res.redirect('/');
+    status : "Selesai",date : date});
+    res.redirect('/selesai');
     }else{
       res.redirect('/loginpage');
     }
@@ -371,9 +375,10 @@ app.get('/kerjakan/(:id)', function(req, res, next) {
     if(sess.username && sess.status == "SuperAdmin" || sess.status == "Admin1") {
    var laporan = req.url;
    var id_laporan = laporan.replace('/kerjakan/','');
+   const date = Date(Date.now());
     axios.put('http://54.167.107.139:4000/pengaduan/'+id_laporan,{
-    status : "Dikerjakan"});
-    res.redirect('/');
+    status : "Dikerjakan",date : date});
+    res.redirect('/dikerjakan');
     }else{
       res.redirect('/loginpage');
     }

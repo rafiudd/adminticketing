@@ -28,7 +28,8 @@
               <a href="/registeradmin" class="pull-left btn btn-primary"><i class="fa fa-plus">Add Admin</i></a>
             </div>
             <div class="box-body data-table">
-            <table class="table table-bordered">
+            <table id="example" class="display table-bordered">
+                <thead>
                   <tr>
                   <th>
                     <p class="text-center">Nama</p>
@@ -43,6 +44,7 @@
                     <p class="text-center">Action</p>
                   </th>
                   </tr>
+                </thead>
     <!--
         Using FOREACH LOOP for the users array
         
@@ -50,6 +52,7 @@
             // el - current element, i - index
         });
     -->
+                <tbody>
     <% if (data) { %>
     <% for(var i=0; i<data.length; i++) { %>
                   <tr>
@@ -68,6 +71,7 @@
                   </tr>
               <% } %>
              <% } %>
+             </tbody>
             </table>
             </div>
           </div>
